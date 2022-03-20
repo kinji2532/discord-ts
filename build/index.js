@@ -30,4 +30,4 @@ client.on('messageCreate', (message) => {
         message.channel.send('pong!');
     }
 });
-client.login(process.env.TOKEN);
+client.login('NTA2MjU0MTY3MzI1NjcxNDI0.XT3dhg.MtToUME1wOnyN_arbtEeUFjUXpk' /* process.env.BOT_TOKEN */);
