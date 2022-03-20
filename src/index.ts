@@ -28,4 +28,4 @@ client.on('messageCreate', (message: Message) => {
   }
 })
 
-client.login(process.env.TOKEN)
+client.login(process.env.BOT_TOKEN)
