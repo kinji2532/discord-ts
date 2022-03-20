@@ -8,6 +8,9 @@
 	  "start": "node build/index.js",
 	  "compile": "tsc -p ."
   },
+  "engines": {
+    "node": "16.x"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
