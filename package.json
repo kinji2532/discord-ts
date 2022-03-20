@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "compile": "tsc -p . && node build/index.js",
+    "test": "ts-node src/index.ts",
+    "start": "node build/index.js",
+    "compile": "tsc -p . && npm start",
     "deploy": "git add . && git commit -m \"commit\" && git push -u origin main"
   },
   "engines": {
