@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "tsc": "./node_modules/typescript/bin/tsc",
     "test": "ts-node src/index.ts",
 	  "start": "node build/index.js",
 	  "compile": "tsc -p . && npm start"
