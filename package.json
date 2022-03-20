@@ -4,12 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "tsc": "./node_modules/typescript/bin/tsc",
-    "build": "tsc",
-    "postinstall": "npm run build",
+    "build": "NODE_ENV=production tsc",
     "test": "ts-node src/index.ts",
 	  "start": "node build/index.js",
-	  "compile": "tsc -p . && npm start"
+	  "compile": "tsc -p . && npm start",
+    "deploy": "git add . && git commit -m \"commit\" && git push -u origin main"
   },
   "engines": {
     "node": "16.x"
