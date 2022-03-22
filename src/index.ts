@@ -18,7 +18,7 @@ const client = new Client({
 
 client.once('ready', async () => {
   console.log(`Logged in as ${client.user?.tag}!`);
-  console.log(fs.readdirSync("/app"));
+  console.log(fs.readdirSync("/app/build"));
   const channel: AnyChannel|null = await client.channels.fetch('599272915153715201');
   if(channel instanceof TextChannel){
     channel.bulkDelete(100);
