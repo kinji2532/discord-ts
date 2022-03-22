@@ -33,11 +33,10 @@ client.on('messageCreate', (message: Message) => {
   if (message.content.startsWith('/')) {
     type list = [ string, ...string[] ];
     const [ cmds, ...args ] = message.content.split(' ');
-    const list: Array = fs.readdirSync('/app/build/cmds');
+    const list: string[] = fs.readdirSync('/app/build/cmds');
     if (list.includes(cmds)) {
       try {
-        import * as func from './cmds/eval';
-        func(message.channel,args.join(' '));
+        require('./cmds/eval')(message.channel,args.join(' '));
       } catch(e) {
         console.log(e);
       }
