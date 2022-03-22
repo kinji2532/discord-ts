@@ -2,7 +2,7 @@ import { Client, Message, AnyChannel, TextChannel } from 'discord.js';
 import dotenv from 'dotenv';
 import fs from 'fs';
 
-import '#/cmds/eval.js';
+import './cmds/eval.js';
 
 dotenv.config();
 
