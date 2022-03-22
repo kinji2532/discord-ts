@@ -13,7 +13,7 @@ const client = new Client({
     'GUILD_PRESENCES', 'GUILD_MESSAGES', 'DIRECT_MESSAGES',
     'DIRECT_MESSAGE_REACTIONS', 'DIRECT_MESSAGE_TYPING'
   ],
-  partials: ['MESSAGE', 'CHANNEL', 'REACTION']
+  partials: [ 'MESSAGE', 'CHANNEL', 'REACTION' ]
 });
 
 client.once('ready', async () => {
