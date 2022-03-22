@@ -1,7 +1,7 @@
-import { Message, Client } from 'discord.js'
-import dotenv from 'dotenv'
+import { Client, Message, AnyChannel, TextChannel } from 'discord.js';
+import dotenv from 'dotenv';
 
-dotenv.config()
+dotenv.config();
 
 const client = new Client({
   restTimeOffset: 1,
@@ -14,18 +14,22 @@ const client = new Client({
     'DIRECT_MESSAGE_REACTIONS', 'DIRECT_MESSAGE_TYPING'
   ],
   partials: ['MESSAGE', 'CHANNEL', 'REACTION']
-})
+});
 
-client.once('ready', () => {
-  console.log('ready!')
-  console.log(client.user?.tag)
-})
+client.once('ready', async () => {
+  console.log(`Logged in as ${client.user?.tag}!`);
+  const channel: AnyChannel|null = await client.channels.fetch('599272915153715201');
+  if(channel instanceof TextChannel){
+    channel.bulkDelete(100);
+    channel.send("起動");
+  }
+});
 
 client.on('messageCreate', (message: Message) => {
   if (message.author.bot) return
   if (message.content.startsWith('!ping')) {
-    message.channel.send('pong!')
+    message.channel.send('pong!');
   }
-})
+});
 
-client.login(process.env.BOT_TOKEN)
+client.login(process.env.BOT_TOKEN);
