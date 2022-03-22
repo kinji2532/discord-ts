@@ -36,7 +36,7 @@ client.on('messageCreate', (message: Message) => {
     const list: Array = fs.readdirSync('/app/build/cmds');
     if (list.includes(cmds)) {
       try {
-        import * as func from './cmds/'+cmds;
+        import * as func from `./cmds/${cmds}`;
         func(message.channel,args.join(' '));
       } catch(e) {
         console.log(e);
