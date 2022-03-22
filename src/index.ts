@@ -34,6 +34,7 @@ client.on('messageCreate', (message: Message) => {
     type list = [ string, ...string[] ];
     const [ cmds, ...args ] = message.content.slice(1).split(/ |\n/);
     const list: string[] = fs.readdirSync('/app/build/cmds');
+    console.log(list,cmds,args);
     if (list.includes(cmds)) {
       try {
         require('./cmds/eval')(message.channel,args.join(' '));
