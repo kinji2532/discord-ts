@@ -1,6 +1,9 @@
 import { Client, Message, AnyChannel, TextChannel } from 'discord.js';
 import dotenv from 'dotenv';
 import fs from 'fs';
+
+import '#/cmds/eval.js';
+
 dotenv.config();
 
 const client = new Client({
@@ -16,10 +19,9 @@ const client = new Client({
   partials: [ 'MESSAGE', 'CHANNEL', 'REACTION' ]
 });
 
-client.once('ready', async () => {
+client.onceq('ready', async () => {
   console.log(`Logged in as ${client.user?.tag}!`);
-  console.log(fs.readdirSync("/app/build"));
-  const channel: AnyChannel|null = await client.channels.fetch('599272915153715201');
+  const channel: AnyChannel | null = await client.channels.fetch('599272915153715201');
   if(channel instanceof TextChannel){
     channel.bulkDelete(100);
     channel.send("起動");
