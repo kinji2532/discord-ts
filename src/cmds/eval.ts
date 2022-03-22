@@ -1,7 +1,9 @@
+import { TextChannel } from 'discord.js';
+import { inspect } from 'util';
 import * as ts from "typescript";
 
-const source = "let x: string  = 'string'";
-
-let result = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS }});
-
-console.log(JSON.stringify(result));
+export function(channel:TextChannel, code: tring) {
+  const result: Object = ts.transpileModule(code, { compilerOptions: { module: ts.ModuleKind.CommonJS }});
+  console.log(result);
+  channel.send(inspect(eval(result.outputText)));
+}

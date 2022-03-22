@@ -30,8 +30,19 @@ client.once('ready', async () => {
 
 client.on('messageCreate', (message: Message) => {
   if (message.author.bot) return
-  if (message.content.startsWith('!ping')) {
-    message.channel.send('pong!');
+  if (message.content.startsWith('/')) {
+    const [ cmds: string, ...args: Array[] ] = message.content.split(' ');
+    const list: Array = fs.readdirSync('/app/build/cmds');
+    if (list.includes(cmds)) {
+      try {
+        import * as func from './cmds/'+cmds;
+        func(message.channel,args.join(' '));
+      } catch(e) {
+        console.log(e);
+      }
+    } else {
+      message.channel.send('そのようなコマンドはありません');
+    }
   }
 });
 
