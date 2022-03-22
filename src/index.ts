@@ -31,7 +31,8 @@ client.once('ready', async () => {
 client.on('messageCreate', (message: Message) => {
   if (message.author.bot) return
   if (message.content.startsWith('/')) {
-    const [ cmds: string, ...args: string[] ] = message.content.split(' ');
+    type list = [ string, ...string[] ];
+    const [ cmds, ...args ] = message.content.split(' ');
     const list: Array = fs.readdirSync('/app/build/cmds');
     if (list.includes(cmds)) {
       try {
