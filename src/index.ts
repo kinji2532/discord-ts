@@ -1,4 +1,5 @@
 import { Client, Message, AnyChannel, TextChannel } from 'discord.js';
+import { inspect } from 'util';
 import dotenv from 'dotenv';
 import fs from 'fs';
 
@@ -36,9 +37,9 @@ client.on('messageCreate', (message: Message) => {
     const list: string[] = fs.readdirSync('/app/build/cmds');
     if (list.includes(cmds+'.js')) {
       try {
-        require('./cmds/eval')(message.channel,args.join(' '));
+        require('./cmds/'+cmds).func(message.channel,args.join(' '));
       } catch(e) {
-        console.log(e);
+        message.channel.send(inspect(e));
       }
     } else {
       message.channel.send('そのようなコマンドはありません');
