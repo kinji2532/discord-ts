@@ -1,4 +1,4 @@
-import { Client, Message, AnyChannel, TextChannel, messageReaction, User } from 'discord.js';
+import { Client, Message, AnyChannel, TextChannel, MessageReaction, PartialMessageReaction, PartialUser, User } from 'discord.js';
 import { inspect } from 'util';
 import dotenv from 'dotenv';
 import fs from 'fs';
@@ -47,7 +47,7 @@ client.on('messageCreate', (message: Message) => {
   }
 });
 
-client.on('messageReactionAdd', (reaction: messageReaction, user: User)=>{
+client.on('messageReactionAdd', (reaction: MessageReaction | PartialMessageReaction, user: PartialUser | User)=>{
   if(!user.bot){
     if(reaction.emoji.id == '721258817546878976'){
       let message: Message = reaction.message;
