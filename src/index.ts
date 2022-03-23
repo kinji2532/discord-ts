@@ -50,7 +50,7 @@ client.on('messageCreate', (message: Message) => {
 client.on('messageReactionAdd', (reaction: MessageReaction | PartialMessageReaction, user: PartialUser | User)=>{
   if(!user.bot){
     if(reaction.emoji.id == '721258817546878976'){
-      if(reaction.message instanceof Message){
+      if(reaction.message instanceof Message && user instanceof User){
         let message: Message = reaction.message;
         client.emit('messageCreate', message);
         reaction.users.remove(user);
