@@ -39,10 +39,10 @@ client.on('messageCreate', (message: Message) => {
       try {
         require('./cmds/'+cmds).func(client, message, ...args);
       } catch(e) {
-        message.channel.send(inspect(e));
+        message.channel.send(inspect(e)).then(msg=>msg.react('721260517875777546'));
       }
     } else {
-      message.channel.send('そのようなコマンドはありません');
+      message.channel.send('そのようなコマンドはありません').then(msg=>msg.react('721260517875777546'));
     }
   }
 });
