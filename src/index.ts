@@ -1,4 +1,4 @@
-import { Client, Message, AnyChannel, TextChannel } from 'discord.js';
+import { Client, Message, AnyChannel, TextChannel, messageReaction, User } from 'discord.js';
 import { inspect } from 'util';
 import dotenv from 'dotenv';
 import fs from 'fs';
@@ -43,6 +43,19 @@ client.on('messageCreate', (message: Message) => {
       }
     } else {
       message.channel.send('そのようなコマンドはありません');
+    }
+  }
+});
+
+client.on('messageReactionAdd', (reaction: messageReaction, user: User)=>{
+  if(!user.bot){
+    if(reaction.emoji.id == '721258817546878976'){
+      let message: Message = reaction.message;
+      client.emit('messageCreate', message);
+      reaction.users.remove(user);
+    }
+    else if(reaction.emoji.id == '721260517875777546'){
+      reaction.message.delete();
     }
   }
 });
