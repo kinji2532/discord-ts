@@ -1,9 +1,10 @@
+/* eslint-disable arrow-spacing *//* eslint-disable space-before-blocks *//* eslint-disable keyword-spacing *//* eslint-disable array-bracket-spacing *//* eslint-disable brace-style *//* eslint-disable semi */
 import { Client, Message, AnyChannel, TextChannel, MessageReaction, PartialMessageReaction, PartialUser, User } from 'discord.js';
 import { inspect } from 'util';
 import dotenv from 'dotenv';
 import fs from 'fs';
 
-import './cmds/eval.js';
+const operator = [ '395010195090178058', '440093776573235200', '397345363415007253' ];
 
 dotenv.config();
 
@@ -23,40 +24,39 @@ const client = new Client({
 client.once('ready', async () => {
   console.log(`Logged in as ${client.user?.tag}!`);
   const channel: AnyChannel | null = await client.channels.fetch('599272915153715201');
-  if(channel instanceof TextChannel){
+  if (channel instanceof TextChannel){
     channel.bulkDelete(100);
-    channel.send("起動");
+    channel.send('起動');
   }
 });
 
 client.on('messageCreate', (message: Message) => {
-  if (message.author.bot) return
-  if (message.content.startsWith('/')) {
-    type list = [ string, ...string[] ];
+  if(message.author.bot) return;
+  if(message.content.startsWith('/')){
     const [ cmds, ...args ] = message.content.slice(1).split(/ |\n/g);
     const list: string[] = fs.readdirSync('/app/build/cmds');
-    if (list.includes(cmds+'.js')) {
-      try {
-        require('./cmds/'+cmds).func(client, message, ...args);
-      } catch(e) {
+    if (list.includes(cmds + '.js')){
+      try{
+        require('./cmds/' + cmds).func(client, message, operator, ...args);
+      }catch(e){
         message.channel.send(inspect(e)).then(msg=>msg.react('721260517875777546'));
       }
-    } else {
+    }else{
       message.channel.send('そのようなコマンドはありません').then(msg=>msg.react('721260517875777546'));
     }
   }
 });
 
 client.on('messageReactionAdd', (reaction: MessageReaction | PartialMessageReaction, user: PartialUser | User)=>{
-  if(!user.bot){
-    if(reaction.emoji.id == '721258817546878976'){
-      if(reaction.message instanceof Message && user instanceof User){
-        let message: Message = reaction.message;
+  if(!user.bot) {
+    if(reaction.emoji.id === '721258817546878976') {
+      if(reaction.message instanceof Message && user instanceof User) {
+        const message: Message = reaction.message;
         client.emit('messageCreate', message);
         reaction.users.remove(user);
       }
     }
-    else if(reaction.emoji.id == '721260517875777546'){
+    else if(reaction.emoji.id === '721260517875777546') {
       reaction.message.delete();
     }
   }
