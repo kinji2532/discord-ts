@@ -62,4 +62,18 @@ client.on('messageReactionAdd', (reaction: MessageReaction | PartialMessageReact
   }
 });
 
+process.on('uncaughtException', (reason, p) => {
+  const channel: AnyChannel | null = await client.channels.fetch('599272915153715201');
+  if (channel instanceof TextChannel){
+    channel.send('uncaught:\n'+inspect(reason).slice(0,1900));
+  }
+});
+process.on('unhandledRejection', (error) => {
+  const channel: AnyChannel | null = await client.channels.fetch('599272915153715201');
+  if (channel instanceof TextChannel){
+    channel.send('unhandled:\n'+inspect(error).slice(0,1900));
+  }
+});
+
+
 client.login(process.env.BOT_TOKEN);

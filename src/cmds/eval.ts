@@ -10,5 +10,5 @@ exports.func = async (client: Client, message: Message, operator: string[], type
     return message.channel.send('使用権限がありません');
   }
   const result = (type === 'js' ? code.join(' ') : type === 'ts' ? ts.transpileModule(code.join(' '), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText : '');
-  message.channel.send(inspect(eval(result))).then(msg=>msg.react('721260517875777546'));
+  message.channel.send(inspect(eval(result)).slice(0,2000)).then(msg=>msg.react('721260517875777546'));
 }
