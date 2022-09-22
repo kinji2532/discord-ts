@@ -1,10 +1,19 @@
 /* eslint-disable arrow-spacing *//* eslint-disable space-before-blocks *//* eslint-disable keyword-spacing *//* eslint-disable array-bracket-spacing *//* eslint-disable brace-style *//* eslint-disable semi */
-import { Client, Message, AnyChannel, TextChannel, MessageReaction, PartialMessageReaction, PartialUser, User } from 'discord.js';
+import {
+  Client, Message, AnyChannel,
+  TextChannel, MessageReaction,
+  PartialMessageReaction,
+  PartialUser, User
+} from 'discord.js';
 import { inspect } from 'util';
 import dotenv from 'dotenv';
 import fs from 'fs';
 
-const operator = [ '395010195090178058', '440093776573235200', '397345363415007253' ];
+const operator = [
+  '395010195090178058',
+  '440093776573235200',
+  '397345363415007253'
+];
 
 dotenv.config();
 
@@ -37,17 +46,20 @@ client.on('messageCreate', (message: Message) => {
     const list: string[] = fs.readdirSync('/app/build/cmds');
     if (list.includes(cmds + '.js')){
       try{
-        require('./cmds/' + cmds).func(client, message, operator, ...args);
+        require('./cmds/' + cmds)
+          .func(client, message, operator, ...args);
       }catch(e){
-        message.channel.send(inspect(e)).then(msg=>msg.react('721260517875777546'));
+        message.channel.send(inspect(e))
+          .then(msg=>msg.react('721260517875777546'));
       }
     }else{
-      message.channel.send('そのようなコマンドはありません').then(msg=>msg.react('721260517875777546'));
+      message.channel.send('そのようなコマンドはありません')
+        .then(msg=>msg.react('721260517875777546'));
     }
   }
 });
 
-client.on('messageReactionAdd', (reaction: MessageReaction | PartialMessageReaction, user: PartialUser | User)=>{
+client.on('messageReactionAdd',( reaction: MessageReaction | PartialMessageReaction, user: PartialUser | User )=>{
   if(!user.bot) {
     if(reaction.emoji.id === '721258817546878976') {
       if(reaction.message instanceof Message && user instanceof User) {
