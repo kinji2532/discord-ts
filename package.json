@@ -6,8 +6,8 @@
   "scripts": {
     "test": "ts-node src/index.ts",
     "start": "node build/index.js",
-    "compile": "tsc -p . && npm i && npm start",
-    "build": "tsc -p . && npm i",
+    "compile": "npm i && tsc -p . && npm start",
+    "build": "npm i && tsc -p .",
     "deploy": "git add . && git commit -m \"commit\" && git push -u origin main"
   },
   "engines": {
