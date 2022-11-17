@@ -50,11 +50,11 @@ client.on('messageCreate', (message: Message) => {
           .func(client, message, operator, ...args);
       }catch(e){
         message.channel.send(inspect(e))
-          .then(msg=>msg.react('721260517875777546'));
+          .then((msg: { react: (arg0: string) => Message; })=>msg.react('721260517875777546'));
       }
     }else{
       message.channel.send('そのようなコマンドはありません')
-        .then(msg=>msg.react('721260517875777546'));
+        .then((msg: { react: (arg0: string) => Message; })=>msg.react('721260517875777546'));
     }
   }
 });
@@ -74,18 +74,17 @@ client.on('messageReactionAdd',( reaction: MessageReaction | PartialMessageReact
   }
 });
 
-process.on('uncaughtException', async (reason, p) => {
+process.on('uncaughtException', async (reason: any, p: any) => {
   const channel: AnyChannel | null = await client.channels.fetch('599272915153715201');
   if (channel instanceof TextChannel){
     channel.send('uncaught:\n'+inspect(reason).slice(0,1900));
   }
 });
-process.on('unhandledRejection', async (error) => {
+process.on('unhandledRejection', async (error: any) => {
   const channel: AnyChannel | null = await client.channels.fetch('599272915153715201');
   if (channel instanceof TextChannel){
     channel.send('unhandled:\n'+inspect(error).slice(0,1900));
   }
 });
-
 
 client.login(process.env.BOT_TOKEN);
